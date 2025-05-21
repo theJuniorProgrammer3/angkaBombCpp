@@ -43,7 +43,7 @@ void traitor(int player) {
                 if(i != 0) {
                         cout << "Berikan ke player selanjutnya" << endl; // Memberitahu untuk melanjutkan ke pemain berikutnya
                 }
-                cout << "Role player" << i << " adalah: " << endl; // Menampilkan peran pemain
+                cout << "Role player" << i << " adalah: "; // Menampilkan peran pemain
                 cin.get(); // Menunggu input dari pengguna
                 cout << (role[i] == 0 ? "Pemain biasa" : (role[i] == 1 ? "Ketua" : "Pengkhianat. Angka bomb: " + to_string(angkaBomb))) << "." << endl; // Menampilkan peran pemain
                 cout << "Enter untuk melanjutkan."; // Meminta pengguna untuk menekan enter
