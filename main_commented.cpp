@@ -109,15 +109,17 @@ void traitor(int player) {
                         int n; // Variabel untuk menyimpan nomor pemain
                         cin >> n; // Menyimpan input pemain
                         if(n > 0) { // Memeriksa apakah input valid
-                                if(!eliminated[n]) { // Memeriksa apakah pemain belum dieliminasi
-                                        eliminated[n] = true; // Menandai pemain sebagai dieliminasi
-                                        if(role[n] == 2) { // Memeriksa apakah pemain yang dieliminasi adalah pengkhianat
-                                                PengkhianatMenang = false; // Menetapkan bahwa pengkhianat tidak menang
-                                                break; // Keluar dari loop
-                                        }
-                                } else {
-                                        cout << "Pemain itu sudah dieliminasi." << endl; // Menampilkan pesan jika pemain sudah dieliminasi
-                                }
+				if(n >= player) {
+                                	if(!eliminated[n]) { // Memeriksa apakah pemain belum dieliminasi
+                                        	eliminated[n] = true; // Menandai pemain sebagai dieliminasi
+                                 		if(role[n] == 2) { // Memeriksa apakah pemain yang dieliminasi adalah pengkhianat
+                                                	PengkhianatMenang = false; // Menetapkan bahwa pengkhianat tidak menang
+                                                	break; // Keluar dari loop
+                                        	}
+                                	} else {
+                                        	cout << "Pemain itu sudah dieliminasi." << endl; // Menampilkan pesan jika pemain sudah dieliminasi
+                                	}
+				}
                         }
                 }
         }

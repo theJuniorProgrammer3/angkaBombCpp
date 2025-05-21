@@ -16,10 +16,10 @@ void traitor(int player) {
 		} else {
 			cerr << "Negative player?";
 		}
-		cerr << " Apa maksudmu?" << endl;
+		cerr << " What's your mean?" << endl;
 		exit(0);
 	} else if(player < 3) {
-		cerr << "Setidaknya ada 3 pemain. " << endl;
+		cerr << "At least 3 player" << endl;
 		exit(0);
 	}
 	random_device rd;
@@ -33,12 +33,12 @@ void traitor(int player) {
 	int angkaBomb = dist(gen);
 	for(int i = 0; i < player; i++) {
 		if(i != 0) {
-			cout << "Berikan ke player selanjutnya" << endl;
+			cout << "Give it to the next player." << endl;
 		}
-		cout << "Role player" << i << " adalah: ";
+		cout << "player" << i << "'s role is: ";
 		cin.get();
-		cout << (role[i] == 0 ? "Pemain biasa" : (role[i] == 1 ? "Ketua" : "Pengkhianat. Angka bomb: " + to_string(angkaBomb))) << "." << endl;
-		cout << "Enter untuk melanjutkan.";
+		cout << (role[i] == 0 ? "Common player" : (role[i] == 1 ? "Head" : "Traitor. Bomb number: " + to_string(angkaBomb))) << "." << endl;
+		cout << "Enter to continue.";
 		cin.get();
 		clsc();
 	}
@@ -58,12 +58,12 @@ void traitor(int player) {
 		}
 	for(int i = 0; i < player; i++) {
 		if(!eliminated[i]) {
-		cout << "Pilih angka persempit (" << rAwal << " - " << rAkhir << ") " << (role[i] == 0 || role[i] == 2 ? "player" + to_string(i) : "ketua (player: " + to_string(i) + ")") << " adalah: ";
+		cout << "Select a narrowing number (" << rAwal << " - " << rAkhir << ") " << (role[i] == 0 || role[i] == 2 ? "player" + to_string(i) : "head (player: " + to_string(i) + ")") << "'s number is: ";
 		cin >> jawaban[i];
 		}
 		if(i == player - 1) {
-			cout << "Serahkan ke ketua, dan diskusikan angka yang akan digunakan untuk angka akhir!" << endl;
-			cout << "Angka akhir, pilihan player: ";
+			cout << "Give it to Head, discuss to choice number from player to final number!" << endl;
+			cout << "Final number, player number choice: ";
 			cin >> tmp;
 			cin.ignore();
 			jawab = jawaban[tmp];
@@ -71,9 +71,9 @@ void traitor(int player) {
 	}
 		if(jawab <= rAwal || jawab >= rAkhir || eliminated[tmp]) {
 			if(eliminated[tmp]) {
-				cout << "Player " << tmp << " udah keluar, ";
+				cout << "Player " << tmp << " is leave ";
 			}
-			cout << "Yang benar donk!" << endl;
+			cout << "Are you serious?" << endl;
 			exit(0);
 		}
 		if(jawab != angkaBomb) {
@@ -82,18 +82,18 @@ void traitor(int player) {
 			} else {
 				rAkhir = jawab;
 			}
-			cout << "Kurungan terus menyempit! Terus sempitkan!" << endl;
+			cout << "The confinement is narrowing, keep narrowing!" << endl;
 		} else {
 			PengkhianatMenang = true;
 			break;
 		}
 		if(player >= 5) {
-			cout << "Siapa yang SUS? Nomor pemain yang akan dieliminasi (angka negatif untuk tidak ada: ";
+			cout << "Who's SUS? Player number to eliminate (negative number to skip): ";
 			int n;
 			cin >> n;
 			if(n > 0) {
 				if(n >= player) {
-					if(!eliminated[n]) {
+				if(!eliminated[n]) {
 						eliminated[n] = true;
 						if(role[n] == 2) {
 							PengkhianatMenang = false;
@@ -103,7 +103,7 @@ void traitor(int player) {
 						cout << "Pemain itu sudah dieliminasi." << endl;
 					}
 				} else {
-					cout << "Yang benar donk!" << endl;
+					cout << "Are you serious?" << endl;
 					exit(0);
 				}
 			}
@@ -111,7 +111,7 @@ void traitor(int player) {
 
 
 	}
-	cout << (PengkhianatMenang ? "Pengkhianat" : "Pejuang") << " menang!" << endl;
+	cout << (PengkhianatMenang ? "Traitor" : "Fighters") << " win!" << endl;
 
 }
 	
@@ -126,17 +126,17 @@ void normal() {
 	int rAkhir = 1000;
 	int jawab = 0;
 	bool menang;
-	cout << "Jangan mengenai bom, sampai bom sampai terkurung sempit!!" << endl; 	
+	cout << "Don't choice bomb number, until bom is locked!" << endl; 	
 	while(true) {
 		if(rAwal + 1 == angkaBomb && rAkhir - 1 == angkaBomb) {
 			menang = true;
 			break;
 		} 
-		cout << "Pilih angka diantara " << rAwal << " sampai " << rAkhir << ": ";
+		cout << "Choice number between " << rAwal << " - " << rAkhir << ": ";p
 
 		cin >> jawab;
 		if(jawab <= rAwal || jawab >= rAkhir) {
-			cout << "Yang benar donk!" << endl;
+			cout << "Are you serious?" << endl;
 			exit(0);
 		}
 		if(jawab != angkaBomb) {
@@ -145,34 +145,34 @@ void normal() {
 			} else {
 				rAkhir = jawab;
 			}
-			cout << "Kurungan terus menyempit! Terus sempitkan!" << endl;
+			cout << "The confinement is narrowing, keep narrowing!" << endl;
 		} else {
 			menang = false;
 			break;
 		}
 	}
-	cout << "Anda " << (menang ? "menang :)" : "kalah :(") << " !" << endl;
+	cout << "You're" << (menang ? "winner :)" : "loser :(") << " !" << endl;
 }
 
 int main() {
-	cout << "Permainan angkaBomb! Sekarang dengan mode Traitor!" << endl;
-	cout << "Pilih:\n1: Mode Biasa\n2: Mode Traitor" << endl;
+	cout << "BombNumber game! Now with traitor mode!" << endl;
+	cout << "Choice:\n1: Classic Mode\n2: Traitor Mode" << endl;
 	int choise;
 	cin >> choise;
 	if(choise != 1 && choise != 2) {
-		cerr << "Yang benar donk!" << endl;
+		cerr << "Are you serious?" << endl;
 		return 0;
 	}
 	if(choise == 1) {
 		normal();
 	} else if (choise == 2) {
 		int playerCount;
-		cout << "Jumlah player: ";
+		cout << "Player count: ";
 		cin >> playerCount;
 		traitor(playerCount);
 	} else {
-		cout << "Pilihan tidak valid." << endl;
+		cout << "Choice is not valid." << endl;
 	}
-	cout << "Seru, kan?!" << endl;
+	cout << "Fun, right?" << endl;
 	return 0;
 }
