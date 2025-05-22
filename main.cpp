@@ -61,21 +61,22 @@ void traitor(int player) {
 		cout << "Pilih angka persempit (" << rAwal << " - " << rAkhir << ") " << (role[i] == 0 || role[i] == 2 ? "player" + to_string(i) : "ketua (player: " + to_string(i) + ")") << " adalah: ";
 		cin >> jawaban[i];
 		}
-		if(i == player - 1) {
+	}
 			cout << "Serahkan ke ketua, dan diskusikan angka yang akan digunakan untuk angka akhir!" << endl;
+			while(true) {
 			cout << "Angka akhir, pilihan player: ";
 			cin >> tmp;
 			cin.ignore();
 			jawab = jawaban[tmp];
-		}
-	}
 		if(jawab <= rAwal || jawab >= rAkhir || eliminated[tmp]) {
 			if(eliminated[tmp]) {
 				cout << "Player " << tmp << " udah keluar, ";
 			}
 			cout << "Yang benar donk!" << endl;
-			exit(0);
+		} else {
+			break;
 		}
+			}
 		if(jawab != angkaBomb) {
 			if(jawab < angkaBomb) {
 				rAwal = jawab;
@@ -88,30 +89,36 @@ void traitor(int player) {
 			break;
 		}
 		if(player >= 5) {
+			while(true) {
 			cout << "Siapa yang SUS? Nomor pemain yang akan dieliminasi (angka negatif untuk tidak ada: ";
 			int n;
 			cin >> n;
+			cin.ignore();
 			if(n > 0) {
 				if(n >= player) {
 					if(!eliminated[n]) {
 						eliminated[n] = true;
 						if(role[n] == 2) {
 							PengkhianatMenang = false;
-							break;
 						}
+						break;
 					} else {
 						cout << "Pemain itu sudah dieliminasi." << endl;
 					}
 				} else {
 					cout << "Yang benar donk!" << endl;
-					exit(0);
+					
 				}
 			}
+			}
+		}
+		if(PengkhianatMenang) {
+			break;
 		}
 
 
 	}
-	cout << (PengkhianatMenang ? "Pengkhianat" : "Pejuang") << " menang!" << endl;
+	cout << (PengkhianatMenang ? "Pengkhianat" : "Pejuang") << " menang! (AngkaBomb: " << angkaBomb << ")" << endl;
 
 }
 	
@@ -131,13 +138,17 @@ void normal() {
 		if(rAwal + 1 == angkaBomb && rAkhir - 1 == angkaBomb) {
 			menang = true;
 			break;
-		} 
+		}
+		while(true) {
 		cout << "Pilih angka diantara " << rAwal << " sampai " << rAkhir << ": ";
 
 		cin >> jawab;
+		cin.ignore();
 		if(jawab <= rAwal || jawab >= rAkhir) {
 			cout << "Yang benar donk!" << endl;
-			exit(0);
+		} else {
+			break;
+		}
 		}
 		if(jawab != angkaBomb) {
 			if(jawab < angkaBomb) {
@@ -151,7 +162,7 @@ void normal() {
 			break;
 		}
 	}
-	cout << "Anda " << (menang ? "menang :)" : "kalah :(") << " !" << endl;
+	cout << "Anda " << (menang ? "menang :)" : "kalah :(") << " ! (AngkaBomb: " << angkaBomb << ")" << endl;
 }
 
 int main() {
