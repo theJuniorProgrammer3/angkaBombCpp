@@ -10,6 +10,7 @@ void clsc() {
 	cout << "\033[2J\033[H";
 }
 void traitor(int player) {
+	cout << "Ada pengkhianat disini! Hindari dia!" << endl;
 	if(player < 1) {
 		if(player == 0) {
 			cerr << "Zero player?";
@@ -25,7 +26,7 @@ void traitor(int player) {
 	random_device rd;
 	mt19937 gen(rd());
 	uniform_int_distribution<int> dist(2, 9999);
-	//0 = player biasa, 1 = ketua, 2 = impostor
+	//0 = player biasa, 1 = ketua, 2 = pengkhianat
 	vector<int> role(player);
 	role[0] = 1;
 	role[1] = 2;
@@ -37,9 +38,11 @@ void traitor(int player) {
 		}
 		cout << "Role player" << i << " adalah: ";
 		cin.get();
+		cin.ignore();
 		cout << (role[i] == 0 ? "Pemain biasa" : (role[i] == 1 ? "Ketua" : "Pengkhianat. Angka bomb: " + to_string(angkaBomb))) << "." << endl;
 		cout << "Enter untuk melanjutkan.";
 		cin.get();
+		cin.ignore();
 		clsc();
 	}
 	int rAwal = 1;
@@ -165,22 +168,65 @@ void normal() {
 	cout << "Anda " << (menang ? "menang :)" : "kalah :(") << " ! (AngkaBomb: " << angkaBomb << ")" << endl;
 }
 
+void invisibleR() {
+	random_device rd;
+	mt19937 gen(rd());
+	uniform_int_distribution<int> dist(2, 999);
+	int angkaBomb = dist(gen);
+	int rAwal = 1;
+	int rAkhir = 1000;
+	int jawab = 0;
+	bool menang;
+	cout << "Rentang yang tak terlihat! Yang pasti 1 - 1000!" << endl;
+	while(true) {
+		if(rAwal + 1 == angkaBomb && rAkhir - 1 == angkaBomb) {
+			menang = true;
+			break;
+		}
+		
+		while(true) {
+		cout << "Pilih angka diantara 1 sampai 1000: ";
+
+		cin >> jawab;
+		cin.ignore();
+		if(jawab <= 1 || jawab >= 1000) {
+			cout << "Yang benar donk!" << endl;
+		} else {
+			break;
+		}
+		}
+		if(jawab != angkaBomb) {
+			if(jawab < angkaBomb) {
+				rAwal = jawab;
+			} else {
+				rAkhir = jawab;
+			}
+			cout << "Kurungan terus menyempit! Terus sempitkan!" << endl;
+		} else {
+			menang = false;
+			break;
+		}
+	}
+	cout << "Anda " << (menang ? "menang :)" : "kalah :(") << " ! (AngkaBomb: " << angkaBomb << ")" << endl;
+}
 int main() {
 	cout << "Permainan angkaBomb! Sekarang dengan mode Traitor!" << endl;
-	cout << "Pilih:\n1: Mode Biasa\n2: Mode Traitor" << endl;
+	cout << "Pilih:\n1: Mode Normal\n2: Mode Traitor\n3: Mode Invisible-R" << endl;
 	int choise;
 	cin >> choise;
-	if(choise != 1 && choise != 2) {
+	if(choise > 3 || choise < 1) {
 		cerr << "Yang benar donk!" << endl;
 		return 0;
 	}
 	if(choise == 1) {
 		normal();
-	} else if (choise == 2) {
+	} else if(choise == 2) {
 		int playerCount;
 		cout << "Jumlah player: ";
 		cin >> playerCount;
 		traitor(playerCount);
+	} else if(choise == 3) {
+		invisibleR();
 	} else {
 		cout << "Pilihan tidak valid." << endl;
 	}
