@@ -3,24 +3,28 @@
 #include <random>
 #include <vector>
 #include <algorithm>
+#include "tinyxml2.cpp"
 
 using namespace std;
+using namespace tinyxml2;
+
+vector<string> strings;
 
 void clsc() {
 	cout << "\033[2J\033[H";
 }
 void traitor(int player) {
-	cout << "Ada pengkhianat disini! Hindari dia!" << endl;
+	cout << strings[12] << endl;
 	if(player < 1) {
 		if(player == 0) {
-			cerr << "Zero player?";
+			cerr << strings[13];
 		} else {
-			cerr << "Negative player?";
+			cerr << strings[14];
 		}
-		cerr << " Apa maksudmu?" << endl;
+		cerr << ' ' << strings[15] << endl;
 		exit(0);
 	} else if(player < 3) {
-		cerr << "Setidaknya ada 3 pemain. " << endl;
+		cerr << strings[16] << endl;
 		exit(0);
 	}
 	random_device rd;
@@ -32,17 +36,17 @@ void traitor(int player) {
 	role[1] = 2;
 	shuffle(role.begin(), role.end(), gen);
 	int angkaBomb = dist(gen);
+	cin.ignore();
+	clsc();
 	for(int i = 0; i < player; i++) {
 		if(i != 0) {
-			cout << "Berikan ke player selanjutnya" << endl;
+			cout << strings[17] << endl;
 		}
-		cout << "Role player" << i << " adalah: ";
+		cout << strings[18] << i << strings[26];
 		cin.get();
-		cin.ignore();
-		cout << (role[i] == 0 ? "Pemain biasa" : (role[i] == 1 ? "Ketua" : "Pengkhianat. Angka bomb: " + to_string(angkaBomb))) << "." << endl;
-		cout << "Enter untuk melanjutkan.";
+		cout << (role[i] == 0 ? strings[19] : (role[i] == 1 ? strings[20] : strings[21] + to_string(angkaBomb))) << "." << endl;
+		cout << strings[22];
 		cin.get();
-		cin.ignore();
 		clsc();
 	}
 	int rAwal = 1;
@@ -61,21 +65,21 @@ void traitor(int player) {
 		}
 	for(int i = 0; i < player; i++) {
 		if(!eliminated[i]) {
-		cout << "Pilih angka persempit (" << rAwal << " - " << rAkhir << ") " << (role[i] == 0 || role[i] == 2 ? "player" + to_string(i) : "ketua (player: " + to_string(i) + ")") << " adalah: ";
+		cout << strings[23] << rAwal << " - " << rAkhir << ") " << (role[i] == 0 || role[i] == 2 ? strings[24] + to_string(i) : strings[25] + to_string(i) + ")") << strings[26];
 		cin >> jawaban[i];
 		}
 	}
-			cout << "Serahkan ke ketua, dan diskusikan angka yang akan digunakan untuk angka akhir!" << endl;
+			cout << strings[27] << endl;
 			while(true) {
-			cout << "Angka akhir, pilihan player: ";
+			cout << strings[28];
 			cin >> tmp;
 			cin.ignore();
 			jawab = jawaban[tmp];
 		if(jawab <= rAwal || jawab >= rAkhir || eliminated[tmp]) {
 			if(eliminated[tmp]) {
-				cout << "Player " << tmp << " udah keluar, ";
+				cout << strings[24] << ' ' << tmp << strings[34];
 			}
-			cout << "Yang benar donk!" << endl;
+			cout << strings[2] << endl;
 		} else {
 			break;
 		}
@@ -86,14 +90,14 @@ void traitor(int player) {
 			} else {
 				rAkhir = jawab;
 			}
-			cout << "Kurungan terus menyempit! Terus sempitkan!" << endl;
+			cout << strings[7] << endl;
 		} else {
 			PengkhianatMenang = true;
 			break;
 		}
 		if(player >= 5) {
 			while(true) {
-			cout << "Siapa yang SUS? Nomor pemain yang akan dieliminasi (angka negatif untuk tidak ada: ";
+			cout << strings[29];
 			int n;
 			cin >> n;
 			cin.ignore();
@@ -106,10 +110,10 @@ void traitor(int player) {
 						}
 						break;
 					} else {
-						cout << "Pemain itu sudah dieliminasi." << endl;
+						cout << strings[35] << endl;
 					}
 				} else {
-					cout << "Yang benar donk!" << endl;
+					cout << strings[2] << endl;
 					
 				}
 			}
@@ -121,7 +125,7 @@ void traitor(int player) {
 
 
 	}
-	cout << (PengkhianatMenang ? "Pengkhianat" : "Pejuang") << " menang! (AngkaBomb: " << angkaBomb << ")" << endl;
+	cout << (PengkhianatMenang ? strings[31] : strings[32]) << strings[9] << "! " << strings[11] << angkaBomb << ")" << endl;
 
 }
 	
@@ -136,19 +140,19 @@ void normal() {
 	int rAkhir = 1000;
 	int jawab = 0;
 	bool menang;
-	cout << "Jangan mengenai bom, sampai bom sampai terkurung sempit!!" << endl; 	
+	cout << strings[4] << endl; 	
 	while(true) {
 		if(rAwal + 1 == angkaBomb && rAkhir - 1 == angkaBomb) {
 			menang = true;
 			break;
 		}
 		while(true) {
-		cout << "Pilih angka diantara " << rAwal << " sampai " << rAkhir << ": ";
+		cout << strings[5] << rAwal << strings[6] << rAkhir << ": ";
 
 		cin >> jawab;
 		cin.ignore();
 		if(jawab <= rAwal || jawab >= rAkhir) {
-			cout << "Yang benar donk!" << endl;
+			cout << strings[2] << endl;
 		} else {
 			break;
 		}
@@ -159,13 +163,13 @@ void normal() {
 			} else {
 				rAkhir = jawab;
 			}
-			cout << "Kurungan terus menyempit! Terus sempitkan!" << endl;
+			cout << strings[7] << endl;
 		} else {
 			menang = false;
 			break;
 		}
 	}
-	cout << "Anda " << (menang ? "menang :)" : "kalah :(") << " ! (AngkaBomb: " << angkaBomb << ")" << endl;
+	cout << "Anda " << (menang ? strings[9] + " :)" : strings[10] + " :(") << " ! " << strings[11] << angkaBomb << ")" << endl;
 }
 
 void invisibleR() {
@@ -177,7 +181,7 @@ void invisibleR() {
 	int rAkhir = 1000;
 	int jawab = 0;
 	bool menang;
-	cout << "Rentang yang tak terlihat! Yang pasti 1 - 1000!" << endl;
+	cout << strings[33] << endl;
 	while(true) {
 		if(rAwal + 1 == angkaBomb && rAkhir - 1 == angkaBomb) {
 			menang = true;
@@ -185,12 +189,12 @@ void invisibleR() {
 		}
 		
 		while(true) {
-		cout << "Pilih angka diantara 1 sampai 1000: ";
+		cout << strings[5] << '1' << strings[6] << "1000." << endl;
 
 		cin >> jawab;
 		cin.ignore();
 		if(jawab <= 1 || jawab >= 1000) {
-			cout << "Yang benar donk!" << endl;
+			cout << strings[2]<< endl;
 		} else {
 			break;
 		}
@@ -201,35 +205,45 @@ void invisibleR() {
 			} else {
 				rAkhir = jawab;
 			}
-			cout << "Kurungan terus menyempit! Terus sempitkan!" << endl;
+			cout << strings[7] << endl;
 		} else {
 			menang = false;
 			break;
 		}
 	}
-	cout << "Anda " << (menang ? "menang :)" : "kalah :(") << " ! (AngkaBomb: " << angkaBomb << ")" << endl;
+	cout << "Anda " << (menang ? strings[9] + " :)" : strings[10] + " :(") << " ! " << strings[11] << angkaBomb << ")" << endl;
 }
 int main() {
-	cout << "Permainan angkaBomb! Sekarang dengan mode Traitor!" << endl;
-	cout << "Pilih:\n1: Mode Normal\n2: Mode Traitor\n3: Mode Invisible-R" << endl;
+	XMLDocument doc;
+	doc.LoadFile("strings.xml");
+	for(int i = 1; i <= 36; i++) {
+		string tmp = "d" + to_string(i);
+		auto teks = doc.FirstChildElement("root")->FirstChildElement(tmp.c_str())->FirstChild()->ToText()->Value();
+		string teks2 = string(teks);
+		while (teks2.find("\\n") != string::npos) {
+    			teks2.replace(teks2.find("\\n"), 2, "\n");
+		}
+		strings.push_back(teks2);
+	}
+	cout << strings[0] << endl;
 	int choise;
 	cin >> choise;
 	if(choise > 3 || choise < 1) {
-		cerr << "Yang benar donk!" << endl;
-		return 0;
+		cerr << strings[2] << endl;
+		return 1;
 	}
 	if(choise == 1) {
 		normal();
 	} else if(choise == 2) {
 		int playerCount;
-		cout << "Jumlah player: ";
+		cout << strings[1];
 		cin >> playerCount;
 		traitor(playerCount);
 	} else if(choise == 3) {
 		invisibleR();
 	} else {
-		cout << "Pilihan tidak valid." << endl;
+		cout << strings[2] << endl;
 	}
-	cout << "Seru, kan?!" << endl;
+	cout << strings[3] << endl;
 	return 0;
 }

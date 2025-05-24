@@ -1,0 +1,38 @@
+<root>
+<d1>Permainan angkaBomb! Sekarang dengan mode Traitor!\nPilih:\n1: Mode Normal\n2: Mode Traitor\n3: Mode Invisible-R</d1>
+<d2>Jumlah player: </d2>
+<d3>Pilihan tidak valid.</d3>
+<d4>Seru, kan?!</d4>
+<d5>Jangan mengenai bom, sampai bom sampai terkunci!!!</d5>
+<d6>Pilih angka diantara </d6>
+<d7> sampai </d7>
+<d8>Rentang menyempit, terus sempitkan!</d8>
+<d9>Anda </d9>
+<d10>menang</d10>
+<d11>kalah</d11>
+<d12>(Angka Bomb: </d12> 
+<d13>Ada pengkhianat disini! Hindari dia!</d13>
+<d14>Zero player?</d14>
+<d15>Negative player?</d15>
+<d16>Apa maksudmu?</d16>
+<d17>Setidaknya ada 3 pemain.</d17>
+<d18>Berikan ke player selanjutnya</d18>
+<d19>Role player</d19>
+<d20>Pemain biasa</d20>
+<d21>Ketua</d21>
+<d22>Pengkhianat. Angka Bomb: </d22>
+<d23>Enter untuk melanjutkan</d23>
+<d24>Pilih angka persempit (</d24>
+<d25>Player</d25>
+<d26>Ketua (player: </d26>
+<d27> adalah: </d27>
+<d28>Serahkan ke ketua, dan diskusikan angka yang akan digunakan untuk angka akhir!</d28>
+<d29>Angka akhir, pilihan player: </d29>
+<d30>Siapa yang SUS? Nomor pemain yang akan dieliminasi (angka negatif untuk tidak ada): </d30>
+<d31>Pemain itu sudah dieliminasi.</d31>
+<d32>Pengkhianat</d32>
+<d33>Pejuang</d33>
+<d34>Rentang yang tak terlihat! Yang pasti 1 - 1000!</d34>
+<d35> udah keluar, </d35>
+<d36>Pemain itu sudah dieliminasi</d36>
+</root>

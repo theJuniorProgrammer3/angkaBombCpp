@@ -63,4 +63,6 @@ Angkabomb is a number-based game that combines numbers narrowing strategies, ded
 1. Player(s) choose numbers in a certain range.
 2. The number chosen will narrow the range of numbers, but don't displayed to player(s).
 3. If the bomb number is affected, the game ends.
-4. Repeat until bomb number is can't be selected (begin range = numberBomb - 1, end range = numberbomb + 1) 
+4. Repeat until bomb number is can't be selected (begin range = numberBomb - 1, end range = numberbomb + 1)
+
+#### tinyxml.h and tinyxml.cpp not made by me, it's made by leethomason.
