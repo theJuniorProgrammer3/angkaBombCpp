@@ -1,5 +1,5 @@
 <root>
-<d1>Permainan angkaBomb! Sekarang dengan mode Traitor!\nPilih:\n1: Mode Normal\n2: Mode Traitor\n3: Mode Invisible-R</d1>
+<d1>Permainan angkaBomb!\nPilih:\n1: Mode Normal\n2: Mode Traitor\n3: Mode Invisible-R\n4: Mode Searcher</d1>
 <d2>Jumlah player: </d2>
 <d3>Pilihan tidak valid.</d3>
 <d4>Seru, kan?!</d4>
@@ -35,4 +35,10 @@
 <d34>Rentang yang tak terlihat! Yang pasti 1 - 1000!</d34>
 <d35> udah keluar, </d35>
 <d36>Pemain itu sudah dieliminasi</d36>
+<d37>Ada bom palsu disini! Jangan kunci bom palsu!</d37>
+<d38>Pilih rentang awal (</d38>
+<d39>Pilih rentang akhir (</d39>
+<d40>Bomb palsu:</d40>
+<d41>Jumlah bomb di rentang: </d41>
+<d42>Bonb tidak ada di rentang! Semua bomb meledak!"</d42>
 </root>

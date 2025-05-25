@@ -169,7 +169,7 @@ void normal() {
 			break;
 		}
 	}
-	cout << "Anda " << (menang ? strings[9] + " :)" : strings[10] + " :(") << " ! " << strings[11] << angkaBomb << ")" << endl;
+	cout << strings[8] << (menang ? strings[9] + " :)" : strings[10] + " :(") << " ! " << strings[11] << angkaBomb << ")" << endl;
 }
 
 void invisibleR() {
@@ -211,12 +211,123 @@ void invisibleR() {
 			break;
 		}
 	}
-	cout << "Anda " << (menang ? strings[9] + " :)" : strings[10] + " :(") << " ! " << strings[11] << angkaBomb << ")" << endl;
+	cout << strings[8] << (menang ? strings[9] + " :)" : strings[10] + " :(") << " ! " << strings[11] << angkaBomb << ")" << endl;
+}
+
+void searcher() {
+	cout << strings[36] << endl;
+	random_device rd;
+	mt19937 gen(rd());
+	uniform_int_distribution<int> dist(2, 999);
+	int angkaBomb = dist(gen);
+	vector<int> bombPalsu(4);
+	bool exist;
+	for(int i = 0; i < 4; i++) {
+		int temp = dist(gen);
+		auto temp2 = find(bombPalsu.begin(), bombPalsu.end(), temp);
+		if(temp2 == bombPalsu.end()) {
+			exist = false;
+		} else {
+			exist = true;
+		}
+		while(temp == angkaBomb && exist) {
+			temp = dist(gen);
+			temp2 = find(bombPalsu.begin(), bombPalsu.end(), temp);
+			
+			if(temp2 == bombPalsu.end()) {
+				exist = false;
+			} else {
+				exist = true;
+			}
+		}
+		bombPalsu[i] = temp;
+	}
+	int rAwal = 1;
+	int rAkhir = 1000;
+	bool menang;
+	int bombCount = 5;
+	bool over;
+	while(true) {
+	if(bombCount == 0) {
+		cout << strings[41] << endl;
+		menang = false;
+		over = true;
+		break;
+	}
+	if(rAwal + 1 == angkaBomb && rAkhir - 1 == angkaBomb) {
+		menang = true;
+		over = true;
+		break;
+	}
+	for(auto hm : bombPalsu) {
+		if(rAwal + 1 == hm && rAkhir - 1 == hm) {
+		menang = false;
+		over = true;
+		break;
+		}
+	}
+	if(over) {
+		break;
+	}
+	int a;
+	int b;
+	while(true) {
+	while(true) {
+	cout << strings[37] << rAwal << strings[6] << rAkhir << "): ";
+		cin >> a;
+		if(a <= rAwal) {
+			cout << strings[2] << endl;
+		} else {
+			break;
+		}
+	}
+	while(true) {
+	cout << strings[38] << rAwal << strings[6] << rAkhir << "): ";
+		cin >> b;
+		if(b >= rAkhir) {
+			cout << strings[2] << endl;
+		} else {
+			break;
+		}
+	}
+	if(a < b) {
+		break;
+	} else {
+		cout << strings[2] << endl;
+	}
+	}
+	if(a == angkaBomb || b == angkaBomb) {
+		menang = false;
+		over = true;
+		break;
+	}
+	rAwal = a;
+	rAkhir = b;
+	int bombCountTmp = 0;
+	if(angkaBomb > rAwal && angkaBomb < rAkhir) {
+		bombCountTmp++;
+	}
+	for(int test : bombPalsu) {
+		if(test > rAwal && test < rAkhir) {
+			bombCountTmp++;
+		}
+		
+	}
+	bombCount = bombCountTmp;
+	cout << strings[40] << bombCount << endl;
+	}
+	cout << strings[8] << (menang ? strings[9] + " :)" : strings[10] + " :(") << " ! " << strings[11] << angkaBomb << ")" << endl;
+	cout << strings[39] << endl;
+	for(auto ah : bombPalsu) {
+		cout << ah << endl;
+	}
+
+
 }
 int main() {
 	XMLDocument doc;
 	doc.LoadFile("strings.xml");
-	for(int i = 1; i <= 36; i++) {
+	for(int i = 1; i <= 41; i++) {
 		string tmp = "d" + to_string(i);
 		auto teks = doc.FirstChildElement("root")->FirstChildElement(tmp.c_str())->FirstChild()->ToText()->Value();
 		string teks2 = string(teks);
@@ -228,7 +339,7 @@ int main() {
 	cout << strings[0] << endl;
 	int choise;
 	cin >> choise;
-	if(choise > 3 || choise < 1) {
+	if(choise > 4 || choise < 1) {
 		cerr << strings[2] << endl;
 		return 1;
 	}
@@ -241,6 +352,8 @@ int main() {
 		traitor(playerCount);
 	} else if(choise == 3) {
 		invisibleR();
+	} else if(choise == 4) {
+		searcher();
 	} else {
 		cout << strings[2] << endl;
 	}
